@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triangle Filling", "Triangle Filling\Triangle Filling.csproj", "{0C7AA24E-3EA4-4ABD-A516-8A6435B3DFD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C7AA24E-3EA4-4ABD-A516-8A6435B3DFD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7AA24E-3EA4-4ABD-A516-8A6435B3DFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7AA24E-3EA4-4ABD-A516-8A6435B3DFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7AA24E-3EA4-4ABD-A516-8A6435B3DFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {952E9C0C-415F-4A00-A24A-6A07BE10AAEE}
+	EndGlobalSection
+EndGlobal
