@@ -46,14 +46,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FillConfig.cs" />
+    <Compile Include="Models\LightColorProvider.cs" />
+    <Compile Include="Models\LightVectorProvider.cs" />
+    <Compile Include="Models\DisturbanceProvider.cs" />
+    <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AET Helpers\AETEntry.cs" />
+    <Compile Include="Models\AET Helpers\AETRange.cs" />
+    <Compile Include="Models\AET Helpers\AETTable.cs" />
+    <Compile Include="Models\AET Helpers\ETTable.cs" />
+    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\LambertColor.cs" />
+    <Compile Include="Models\ScanLineFiller.cs" />
+    <Compile Include="Models\Vector3D.cs" />
+    <Compile Include="Models\NormalVectorProvider.cs" />
+    <Compile Include="Models\ObjectColorProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,6 +93,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Textures\brick_heightmap.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\brick_normalmap.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\normal_map.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Textures\object_texture.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
