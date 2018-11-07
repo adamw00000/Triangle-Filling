@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Triangle_Filling.Models;
 
 namespace Triangle_Filling
 {
@@ -11,26 +12,29 @@ namespace Triangle_Filling
     {
         ETTable ET;
         AETTable AET;
-        readonly List<Edge> edges;
-        readonly Bitmap bitmap;
+        Triangle triangle;
+        readonly int id;
+        //readonly Bitmap bitmap;
 
-        readonly FillConfig config;
+        public static Func<Vector3D, int, int, Vector3D> CalculateDisturbance { get; set; } = DisturbanceProvider.ConstantDisturbance;
+        public static Func<int, int, Vector3D> CalculateNormalVector { get; set; } = NormalVectorProvider.ConstantVector;
+        public static Func<Color> GetLightColor { get; set; } = LightColorProvider.StaticLigthing;
+        public static Func<int, int, Color> GetRedReflectorColor { get; set; } = ReflectorLightProvider.NoReflector;
+        public static Func<int, int, Color> GetGreenReflectorColor { get; set; } = ReflectorLightProvider.NoReflector;
+        public static Func<int, int, Color> GetBlueReflectorColor { get; set; } = ReflectorLightProvider.NoReflector;
+        public static Func<int, int, Vector3D> GetLightVector { get; set; } = LightVectorProvider.ConstantVector;
+        public static Func<int, int, int, Color> GetObjectColor { get; set; } = ObjectColorProvider.ConstantColor;
+        public static Func<int, int, int, Color> GetSecondObjectColor { get; set; } = ObjectColorProvider.ConstantColor;
 
-        public Func<Vector3D, int, int, FillConfig, Vector3D> CalculateDisturbance { get; set; } = DisturbanceProvider.ConstantDisturbance;
-        public Func<int, int, FillConfig, Vector3D> CalculateNormalVector { get; set; } = NormalVectorProvider.ConstantVector;
-        public Func<FillConfig, Color> GetLightColor { get; set; } = LightColorProvider.StaticLigthing;
-        public Func<int, int, FillConfig, Vector3D> GetLightVector { get; set; } = LightVectorProvider.ConstantVector;
-        public Func<int, int, FillConfig, Color> GetObjectColor { get; set; } = ObjectColorProvider.ConstantColor;
-
-        public ScanLineFiller(Bitmap bitmap, List<Edge> edges, FillConfig config)
+        public ScanLineFiller(int id, Triangle triangle)
         {
-            this.edges = edges;
-            this.bitmap = bitmap;
-            this.config = config;
+            this.triangle = triangle;
+            this.id = id;
         }
 
-        public void Fill()
+        public void Fill(DirectBitmap bitmap)
         {
+            LightVectorProvider.Step++;
             PrepareStructures();
 
             int y = ET.GetLowestY();
@@ -48,7 +52,7 @@ namespace Triangle_Filling
 
                 foreach (var range in AET.GetRanges())
                 {
-                    FillRange(y, range);
+                    FillRange(bitmap, y, range);
                 }
 
                 AET.DeleteY(y);
@@ -60,39 +64,50 @@ namespace Triangle_Filling
 
         private void PrepareStructures()
         {
-            ET = new ETTable(edges);
+            ET = new ETTable(triangle.Edges);
             AET = new AETTable();
         }
 
-        private void FillRange(int y, AETRange range)
+        private void FillRange(DirectBitmap bitmap, int y, AETRange range)
         {
-            //bitmap.DrawLine(range.X1, y, range.X2, y, GetColor());
             for (int x = range.X1; x <= range.X2; x++)
             {
                 bitmap.SetPixel(x, y, GetColor(x, y));
             }
         }
 
-        private Color GetColor(int x, int y)
+        public Color GetColor(int x, int y)
         {
-            Color IL = GetLightColor(config);
-            Color IO = GetObjectColor(x, y, config);
+            Color IL = GetLightColor();
+            Color ILR = GetRedReflectorColor(x, y);
+            Color ILG = GetGreenReflectorColor(x, y);
+            Color ILB = GetBlueReflectorColor(x, y);
 
-            Vector3D L = GetLightVector(x, y, config);
+            Color IO;
+            if (id % 2 == 0)
+                IO = GetObjectColor(id, x, y);
+            else
+                IO = GetSecondObjectColor(id, x, y);
+
+            Vector3D L = GetLightVector(x, y);
             L.Normalize();
             Vector3D N = GetNormalVector(x, y);
             double cosine = Vector3D.DotProduct(N, L);
+            //double cosine = Math.Max(FillConfig.Cosines[x, y], 0);
 
-            byte R = (byte)(IL.R * IO.R * cosine / 255d);
-            byte G = (byte)(IL.G * IO.G * cosine / 255d);
-            byte B = (byte)(IL.B * IO.B * cosine / 255d);
+            if (cosine < 0)
+                cosine = 0;
+
+            byte R = (byte)(Math.Min(IL.R * IO.R * cosine / 255d + ILR.R * IO.R * cosine / 255d, 255));
+            byte G = (byte)(Math.Min(IL.G * IO.G * cosine / 255d + ILG.G * IO.G * cosine / 255d, 255));
+            byte B = (byte)(Math.Min(IL.B * IO.B * cosine / 255d + ILB.B * IO.B * cosine / 255d, 255));
             return Color.FromArgb(255, R, G, B);
         }
 
-        private Vector3D GetNormalVector(int x, int y)
+        public static Vector3D GetNormalVector(int x, int y)
         {
-            Vector3D N = CalculateNormalVector(x, y, config);
-            Vector3D D = CalculateDisturbance(N, x, y, config);
+            Vector3D N = CalculateNormalVector(x, y);
+            Vector3D D = CalculateDisturbance(N, x, y);
 
             N = N + D;
             N.Normalize();

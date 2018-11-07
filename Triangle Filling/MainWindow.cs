@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PixelMapSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,63 +8,91 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Triangle_Filling.Models;
 
 namespace Triangle_Filling
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         public Bitmap Bitmap { get; set; } = new Bitmap(800, 600);
+        public DirectBitmap old;
         List<Edge> edges = new List<Edge>();
         List<ScanLineFiller> fillers = new List<ScanLineFiller>();
+        List<Triangle> triangles = new List<Triangle>();
+        bool moveMode = false;
+        Vertex movedVertex;
 
-        FillConfig config = new FillConfig();
+        BackgroundWorker worker = new BackgroundWorker();
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
             
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
             Image.Image = Bitmap;
-            HeightMapImage.BackgroundImage = config.HeightMapTexture;
-            NormalMapImage.BackgroundImage = config.NormalMapTexture;
-            ObjectColorImage.BackColor = config.ObjectColor;
-            LightColorImage.BackColor = config.LightColor;
-            ObjectTextureImage.BackgroundImage = config.ObjectTexture;
 
-            edges.Add(new Edge() { X1 = 0, Y1 = 0, X2 = 0, Y2 = 600 });
-            edges.Add(new Edge() { X1 = 0, Y1 = 600, X2 = 600, Y2 = 600 });
-            edges.Add(new Edge() { X1 = 600, Y1 = 600, X2 = 0, Y2 = 0 });
+            HeightMapImage.BackgroundImage = FillConfig.HeightMapTexture.GetBitmap();
+            NormalMapImage.BackgroundImage = FillConfig.NormalMapTexture.GetBitmap();
+            ObjectColorImage.BackColor = FillConfig.ObjectColor;
+            ObjectColorImage2.BackColor = FillConfig.SecondObjectColor;
+            LightColorImage.BackColor = FillConfig.LightColor;
+            ObjectTextureImage.BackgroundImage = FillConfig.ObjectTexture.GetBitmap();
+            ObjectTextureImage2.BackgroundImage = FillConfig.SecondObjectTexture.GetBitmap();
 
-            ScanLineFiller filler = new ScanLineFiller(Bitmap, edges, config);
-            fillers.Add(filler);
+            Triangle t1 = new Triangle
+            {
+                V1 = new Vertex(400, 150),
+                V2 = new Vertex(600, 550),
+                V3 = new Vertex(200, 550)
+            };
+            triangles.Add(t1);
+            Triangle t2 = new Triangle
+            {
+                V1 = new Vertex(600, 100),
+                V2 = new Vertex(500, 150),
+                V3 = new Vertex(400, 100)
+            };
+            triangles.Add(t2);
 
-            Draw();
+            ScanLineFiller f1 = new ScanLineFiller(0, t1);
+            fillers.Add(f1);
+            ScanLineFiller f2 = new ScanLineFiller(1, t2);
+            fillers.Add(f2);
+
+            DrawAsync();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void DrawAsync()
         {
-            //Bitmap = new Bitmap(800, 600);
-            //foreach(var filler in fillers)
-            //    filler.Fill();
-            //Refresh();
+            if (!worker.IsBusy)
+                worker.RunWorkerAsync();
         }
 
-        private void Draw()
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Graphics g = Graphics.FromImage(Bitmap);
-            g.Clear(Color.FromKnownColor(KnownColor.White));
+            Image.Image = (e.Result as DirectBitmap).Bitmap;
+            old?.Dispose();
+            old = (e.Result as DirectBitmap);
+            DrawAsync();
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            DirectBitmap bitmap = new DirectBitmap(800, 600);
 
             foreach (var filler in fillers)
-                filler.Fill();
-            Refresh();
+                filler.Fill(bitmap);
+
+            e.Result = bitmap;
         }
 
         private void DisturbanceRadioButtonMap_CheckedChanged(object sender, EventArgs e)
         {
             if (DisturbanceRadioButtonMap.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.CalculateDisturbance = DisturbanceProvider.HeightMapDisturbance;
-                Draw();
+                ScanLineFiller.CalculateDisturbance = DisturbanceProvider.HeightMapDisturbance;
             }
         }
 
@@ -71,9 +100,7 @@ namespace Triangle_Filling
         {
             if (DisturbanceRadioButtonNone.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.CalculateDisturbance = DisturbanceProvider.ConstantDisturbance;
-                Draw();
+                ScanLineFiller.CalculateDisturbance = DisturbanceProvider.ConstantDisturbance;
             }
         }
 
@@ -81,9 +108,7 @@ namespace Triangle_Filling
         {
             if (NormalVectorRadioButtonConstant.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.CalculateNormalVector = NormalVectorProvider.ConstantVector;
-                Draw();
+                ScanLineFiller.CalculateNormalVector = NormalVectorProvider.ConstantVector;
             }
         }
 
@@ -91,9 +116,7 @@ namespace Triangle_Filling
         {
             if (NormalMapRadioButtonNormalMap.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.CalculateNormalVector = NormalVectorProvider.NormalMapVector;
-                Draw();
+                ScanLineFiller.CalculateNormalVector = NormalVectorProvider.NormalMapVector;
             }
         }
 
@@ -101,9 +124,7 @@ namespace Triangle_Filling
         {
             if (LightVectorRadioButtonConstant.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.GetLightVector = LightVectorProvider.ConstantVector;
-                Draw();
+                ScanLineFiller.GetLightVector = LightVectorProvider.ConstantVector;
             }
         }
 
@@ -111,9 +132,7 @@ namespace Triangle_Filling
         {
             if (LightVectorRadioButtonRadius.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.GetLightVector = LightVectorProvider.SphereVector;
-                Draw();
+                ScanLineFiller.GetLightVector = LightVectorProvider.SphereVector;
             }
         }
 
@@ -121,9 +140,7 @@ namespace Triangle_Filling
         {
             if (ObjectColorRadioButtonTexture.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.GetObjectColor = ObjectColorProvider.TextureColor;
-                Draw();
+                ScanLineFiller.GetObjectColor = ObjectColorProvider.TextureColor;
             }
         }
 
@@ -131,43 +148,36 @@ namespace Triangle_Filling
         {
             if (ObjectColorRadioButtonConstant.Checked)
             {
-                foreach (var filler in fillers)
-                    filler.GetObjectColor = ObjectColorProvider.ConstantColor;
-                Draw();
+                ScanLineFiller.GetObjectColor = ObjectColorProvider.ConstantColor;
             }
         }
         
         private void LightColorImage_BackColorChanged(object sender, EventArgs e)
         {
-            config.LightColor = (sender as PictureBox).BackColor;
-            Draw();
+            FillConfig.LightColor = (sender as PictureBox).BackColor;
         }
 
         private void ObjectColorImage_BackColorChanged(object sender, EventArgs e)
         {
-            config.ObjectColor = (sender as PictureBox).BackColor;
-            Draw();
+            FillConfig.ObjectColor = (sender as PictureBox).BackColor;
         }
 
         private void ObjectTextureImage_BackgroundImageChanged(object sender, EventArgs e)
         {
-            config.ObjectTexture = (sender as PictureBox).BackgroundImage as Bitmap;
+            FillConfig.ObjectTexture = PixelMap.SlowLoad((sender as PictureBox).BackgroundImage as Bitmap);
             (sender as PictureBox).Image = (sender as PictureBox).BackgroundImage;
-            Draw();
         }
 
         private void NormalMapImage_BackgroundImageChanged(object sender, EventArgs e)
         {
-            config.NormalMapTexture = (sender as PictureBox).BackgroundImage as Bitmap;
+            FillConfig.NormalMapTexture = PixelMap.SlowLoad((sender as PictureBox).BackgroundImage as Bitmap);
             (sender as PictureBox).Image = (sender as PictureBox).BackgroundImage;
-            Draw();
         }
 
         private void HeightMapImage_BackgroundImageChanged(object sender, EventArgs e)
         {
-            config.HeightMapTexture = (sender as PictureBox).BackgroundImage as Bitmap;
+            FillConfig.HeightMapTexture = PixelMap.SlowLoad((sender as PictureBox).BackgroundImage as Bitmap);
             (sender as PictureBox).Image = (sender as PictureBox).BackgroundImage;
-            Draw();
         }
 
         private void LightColorButton_Click(object sender, EventArgs e)
@@ -225,6 +235,155 @@ namespace Triangle_Filling
                 return;
 
             HeightMapImage.BackgroundImage = new Bitmap(dialog.FileName);
+        }
+
+        private void Image_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+            Point p = e.Location;
+
+            foreach (var t in triangles)
+            {
+                if (t.GetClickedVertex(p, out movedVertex))
+                {
+                    moveMode = true;
+                    break;
+                }
+            }
+        }
+
+        private void Image_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+
+            if (moveMode)
+            {
+                movedVertex.X = Math.Max(Math.Min(p.X, Bitmap.Width - 1), 0);
+                movedVertex.Y = Math.Max(Math.Min(p.Y, Bitmap.Height - 1), 0);
+            }
+        }
+
+        private void Image_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+
+            if (moveMode)
+            {
+                moveMode = false;
+
+                movedVertex.X = Math.Max(Math.Min(p.X, Bitmap.Width - 1), 0);
+                movedVertex.Y = Math.Max(Math.Min(p.Y, Bitmap.Height - 1), 0);
+            }
+        }
+
+        private void ObjectColorRadioButtonConstant2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ObjectColorRadioButtonConstant2.Checked)
+            {
+                ScanLineFiller.GetSecondObjectColor = ObjectColorProvider.ConstantColor;
+            }
+        }
+
+        private void ObjectColorRadioButtonTexture2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ObjectColorRadioButtonTexture2.Checked)
+            {
+                ScanLineFiller.GetSecondObjectColor = ObjectColorProvider.TextureColor;
+            }
+        }
+
+        private void ObjectColorImage2_BackColorChanged(object sender, EventArgs e)
+        {
+            FillConfig.SecondObjectColor = (sender as PictureBox).BackColor;
+        }
+
+        private void ObjectTextureImage2_BackgroundImageChanged(object sender, EventArgs e)
+        {
+            FillConfig.SecondObjectTexture = PixelMap.SlowLoad((sender as PictureBox).BackgroundImage as Bitmap);
+            (sender as PictureBox).Image = (sender as PictureBox).BackgroundImage;
+        }
+
+        private void ObjectColorButton2_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            ObjectColorImage2.BackColor = dialog.Color;
+        }
+
+        private void ObjectTextureButton2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "Image files|*.png; *.jpg; *.bmp"
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            ObjectTextureImage2.BackgroundImage = new Bitmap(dialog.FileName);
+        }
+
+        private void LightRadiusTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse((sender as TextBox).Text, out double R) && R > 0)
+            {
+                FillConfig.Radius = R;
+            }
+        }
+
+        private void RedReflectorCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RedReflectorCheckbox.Checked)
+            {
+                ScanLineFiller.GetRedReflectorColor = ReflectorLightProvider.RReflector;
+            }
+            else
+            {
+                ScanLineFiller.GetRedReflectorColor = ReflectorLightProvider.NoReflector;
+            }
+        }
+
+        private void GreenReflectorCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (GreenReflectorCheckbox.Checked)
+            {
+                ScanLineFiller.GetGreenReflectorColor = ReflectorLightProvider.GReflector;
+            }
+            else
+            {
+                ScanLineFiller.GetGreenReflectorColor = ReflectorLightProvider.NoReflector;
+            }
+        }
+
+        private void BlueReflectorCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BlueReflectorCheckbox.Checked)
+            {
+                ScanLineFiller.GetBlueReflectorColor = ReflectorLightProvider.BReflector;
+            }
+            else
+            {
+                ScanLineFiller.GetBlueReflectorColor = ReflectorLightProvider.NoReflector;
+            }
+        }
+
+        private void ReflectorHeightTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse((sender as TextBox).Text, out double H) && H > 0)
+            {
+                FillConfig.ReflectorHeight = H;
+            }
+        }
+
+        private void ReflectorCosinePowerTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse((sender as TextBox).Text, out double P) && P > 1)
+            {
+                FillConfig.ReflectorCosinePower = P;
+            }
         }
     }
 }

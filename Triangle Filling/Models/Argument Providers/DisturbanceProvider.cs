@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PixelMapSharp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,16 +10,16 @@ namespace Triangle_Filling
 {
     static class DisturbanceProvider
     {
-        public static Func<Vector3D, int, int, FillConfig, Vector3D> HeightMapDisturbance = (N, x, y, config) =>
+        public static Func<Vector3D, int, int, Vector3D> HeightMapDisturbance = (N, x, y) =>
         {
-            Bitmap HeightMap = config.HeightMapTexture;
+            PixelMap HeightMap = FillConfig.HeightMapTexture;
 
             x %= HeightMap.Width;
             y %= HeightMap.Height;
 
-            Color c = HeightMap.GetPixel(x, y);
-            Color cx = HeightMap.GetPixel((x + 1) % HeightMap.Width, y);
-            Color cy = HeightMap.GetPixel(x, (y + 1) % HeightMap.Height);
+            Color c = HeightMap[x, y].Color;
+            Color cx = HeightMap[(x + 1) % HeightMap.Width, y].Color;
+            Color cy = HeightMap[x, (y + 1) % HeightMap.Height].Color;
 
             Vector3D T = new Vector3D(1, 0, -N.X);
             Vector3D B = new Vector3D(0, 1, -N.Y);
@@ -31,7 +32,7 @@ namespace Triangle_Filling
             return D;
         };
 
-        public static Func<Vector3D, int, int, FillConfig, Vector3D> ConstantDisturbance = (N, x, y, config) =>
+        public static Func<Vector3D, int, int, Vector3D> ConstantDisturbance = (N, x, y) =>
         {
             return new Vector3D(0, 0, 0);
         };

@@ -9,6 +9,6 @@ namespace Triangle_Filling
 {
     static class LightColorProvider
     {
-        public static Func<FillConfig, Color> StaticLigthing = (config) => config.LightColor;
+        public static Func<Color> StaticLigthing = () => FillConfig.LightColor;
     }
 }

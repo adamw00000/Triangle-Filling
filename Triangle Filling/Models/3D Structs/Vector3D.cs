@@ -2,7 +2,7 @@
 
 namespace Triangle_Filling
 {
-    internal class Vector3D
+    public struct Vector3D
     {
         public double X { get; set; }
         public double Y { get; set; }
