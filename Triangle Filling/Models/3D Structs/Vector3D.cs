@@ -41,12 +41,12 @@ namespace Triangle_Filling
             return new Vector3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
         }
 
-        public static Vector3D operator *(Vector3D v1, double a)
+        public static Vector3D operator*(Vector3D v1, double a)
         {
             return new Vector3D(v1.X * a, v1.Y * a, v1.Z * a);
         }
 
-        public static Vector3D operator *(double a, Vector3D v1)
+        public static Vector3D operator*(double a, Vector3D v1)
         {
             return new Vector3D(v1.X * a, v1.Y * a, v1.Z * a);
         }

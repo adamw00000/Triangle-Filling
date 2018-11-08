@@ -45,6 +45,8 @@ namespace Triangle_Filling
 
             while (y <= yMax || !AET.IsEmpty)
             {
+                AET.DeleteY(y);
+
                 if (y <= yMax)
                     AET.Add(ET[y]);
 
@@ -55,9 +57,7 @@ namespace Triangle_Filling
                     FillRange(bitmap, y, range);
                 }
 
-                AET.DeleteY(y);
                 y++;
-                AET.DeleteY(y); // ????????????????????????????????????
                 AET.UpdateX();
             }
         }
@@ -92,8 +92,8 @@ namespace Triangle_Filling
             Vector3D L = GetLightVector(x, y);
             L.Normalize();
             Vector3D N = GetNormalVector(x, y);
+            N.Normalize();
             double cosine = Vector3D.DotProduct(N, L);
-            //double cosine = Math.Max(FillConfig.Cosines[x, y], 0);
 
             if (cosine < 0)
                 cosine = 0;
@@ -110,8 +110,6 @@ namespace Triangle_Filling
             Vector3D D = CalculateDisturbance(N, x, y);
 
             N = N + D;
-            N.Normalize();
-
             return N;
         }
     }
