@@ -8,20 +8,21 @@ namespace Triangle_Filling
 {
     static class LightVectorProvider
     {
-        const double R = 200;
-        const double alphaChange = Math.PI / 12;
+        static readonly double R = FillConfig.AnimationRadius;
+        static readonly double alphaChange = Math.PI / FillConfig.AnimationFrames;
 
         public static int Step = 0;
 
         public static Func<int, int, Vector3D> ConstantVector = (x, y) =>
         {
-            return new Vector3D(0 - x, -(0 - y), 400);//(0, 0, 1);
+            return new Vector3D(0, 0, 1);//(0 - x, -(0 - y), 400);
         };
 
         public static Func<int, int, Vector3D> SphereVector = (x, y) =>
         {
-            return new Vector3D(Constants.ImageWidth / 2 + R * Math.Cos(Step * alphaChange) - x,
-                -(Constants.ImageHeight / 2 + R * Math.Sin(Step * alphaChange) - y), FillConfig.Radius);
+            double alpha = (Step % (FillConfig.AnimationFrames * 2)) * alphaChange;
+            return new Vector3D(Constants.ImageWidth / 2 + R * Math.Cos(alpha) - x,
+                    -(Constants.ImageHeight / 2 + R * Math.Sin(alpha) - y), FillConfig.AnimationLightHeight);
         };
     }
 }

@@ -66,6 +66,8 @@ namespace Triangle_Filling
 
         private void DrawAsync()
         {
+            LightVectorProvider.Step++;
+
             if (!worker.IsBusy)
                 worker.RunWorkerAsync();
         }
@@ -330,7 +332,7 @@ namespace Triangle_Filling
         {
             if (double.TryParse((sender as TextBox).Text, out double R) && R > 0)
             {
-                FillConfig.Radius = R;
+                FillConfig.AnimationLightHeight = R;
             }
         }
 

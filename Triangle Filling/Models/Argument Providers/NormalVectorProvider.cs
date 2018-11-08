@@ -14,6 +14,8 @@ namespace Triangle_Filling
         {
             PixelMap NormalMap = FillConfig.NormalMapTexture;
 
+            x *= 2;
+            y *= 2;
             x %= NormalMap.Width;
             y %= NormalMap.Height;
 

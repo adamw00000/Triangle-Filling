@@ -17,9 +17,13 @@ namespace Triangle_Filling
         public static Color ObjectColor { get; set; } = Color.LimeGreen;
         public static Color SecondObjectColor { get; set; } = Color.Crimson;
         public static Color LightColor { get; set; } = Color.White;
-        public static double Radius { get; set; } = 100;
+
         public static double ReflectorHeight { get; set; } = 100;
         public static double ReflectorCosinePower { get; set; } = 100;
+
+        public static double AnimationLightHeight { get; set; } = 100;
+        public static double AnimationFrames { get; set; } = 12;
+        public static double AnimationRadius { get; set; } = 200;
 
         public static Point3D RReflectorPos =>
             new Point3D(0, Constants.ImageHeight, ReflectorHeight);
@@ -29,6 +33,7 @@ namespace Triangle_Filling
             new Point3D(Constants.ImageWidth, Constants.ImageHeight, ReflectorHeight);
         public static Point3D MiddleImagePos =>
             new Point3D(Constants.ImageWidth / 2, Constants.ImageHeight / 2, 0);
+
 
         //public static double[,] Cosines { get; set; } = new double[800, 600];
         //public static Color[,] Colors { get; set; } = new Color[800, 600];
