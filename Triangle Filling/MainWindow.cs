@@ -19,8 +19,11 @@ namespace Triangle_Filling
         List<Edge> edges = new List<Edge>();
         List<ScanLineFiller> fillers = new List<ScanLineFiller>();
         List<Triangle> triangles = new List<Triangle>();
-        bool moveMode = false;
+        bool moveTriangleMode = false;
+        bool moveVertexMode = false;
         Vertex movedVertex;
+        Triangle movedTriangle;
+        Point lastTrianglePos;
 
         BackgroundWorker worker = new BackgroundWorker();
 
@@ -249,8 +252,17 @@ namespace Triangle_Filling
             {
                 if (t.GetClickedVertex(p, out movedVertex))
                 {
-                    moveMode = true;
+                    moveVertexMode = true;
                     break;
+                }
+            }
+            foreach (var t in triangles)
+            {
+                if (t.IsPointInTriangle(p))
+                {
+                    movedTriangle = t;
+                    lastTrianglePos = p;
+                    moveTriangleMode = true;
                 }
             }
         }
@@ -259,10 +271,16 @@ namespace Triangle_Filling
         {
             Point p = e.Location;
 
-            if (moveMode)
+            if (moveVertexMode)
             {
                 movedVertex.X = Math.Max(Math.Min(p.X, Bitmap.Width - 1), 0);
                 movedVertex.Y = Math.Max(Math.Min(p.Y, Bitmap.Height - 1), 0);
+            }
+            if (moveTriangleMode)
+            {
+                var deltaPos = new Vector { X = p.X - lastTrianglePos.X, Y = p.Y - lastTrianglePos.Y };
+                movedTriangle.Move(deltaPos);
+                lastTrianglePos = p;
             }
         }
 
@@ -270,12 +288,20 @@ namespace Triangle_Filling
         {
             Point p = e.Location;
 
-            if (moveMode)
+            if (moveVertexMode)
             {
-                moveMode = false;
+                moveVertexMode = false;
 
                 movedVertex.X = Math.Max(Math.Min(p.X, Bitmap.Width - 1), 0);
                 movedVertex.Y = Math.Max(Math.Min(p.Y, Bitmap.Height - 1), 0);
+            }
+            if (moveTriangleMode)
+            {
+                moveTriangleMode = false;
+
+                var deltaPos = new Vector { X = p.X - lastTrianglePos.X, Y = p.Y - lastTrianglePos.Y };
+                movedTriangle.Move(deltaPos);
+                lastTrianglePos = Point.Empty;
             }
         }
 
