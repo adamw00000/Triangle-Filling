@@ -253,7 +253,7 @@ namespace Triangle_Filling
                 if (t.GetClickedVertex(p, out movedVertex))
                 {
                     moveVertexMode = true;
-                    break;
+                    return;
                 }
             }
             foreach (var t in triangles)
