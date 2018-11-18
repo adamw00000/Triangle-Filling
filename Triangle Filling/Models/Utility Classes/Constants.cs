@@ -11,8 +11,8 @@ namespace Triangle_Filling
 {
     public static class Constants
     {
-        public static int ImageWidth { get; } = 800;
-        public static int ImageHeight { get; } = 600;
+        public static int ImageWidth { get; } = 821;
+        public static int ImageHeight { get; } = 612;
 
         public static PixelMap NormalMapTexture = PixelMap.SlowLoad(new Bitmap($"{Directory.GetCurrentDirectory()}/Textures/normal_map.jpg"));
         public static PixelMap NormalMapBrickTexture = PixelMap.SlowLoad(new Bitmap($"{Directory.GetCurrentDirectory()}/Textures/brick_normalmap.png"));

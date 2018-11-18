@@ -14,7 +14,7 @@ namespace Triangle_Filling
 {
     public partial class MainWindow : Form
     {
-        public Bitmap Bitmap { get; set; } = new Bitmap(800, 600);
+        public Bitmap Bitmap { get; set; } = new Bitmap(Constants.ImageWidth, Constants.ImageHeight);
         public DirectBitmap old;
         List<Edge> edges = new List<Edge>();
         List<ScanLineFiller> fillers = new List<ScanLineFiller>();
@@ -85,7 +85,7 @@ namespace Triangle_Filling
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            DirectBitmap bitmap = new DirectBitmap(800, 600);
+            DirectBitmap bitmap = new DirectBitmap(Constants.ImageWidth, Constants.ImageHeight);
 
             foreach (var filler in fillers)
                 filler.Fill(bitmap);

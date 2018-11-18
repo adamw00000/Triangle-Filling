@@ -38,6 +38,9 @@
             this.ObjectColorImage = new System.Windows.Forms.PictureBox();
             this.ObjectColorRadioButtonConstant = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LightHeightTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.LightRadiusTextBox = new System.Windows.Forms.TextBox();
             this.LightVectorRadioButtonRadius = new System.Windows.Forms.RadioButton();
             this.LightVectorRadioButtonConstant = new System.Windows.Forms.RadioButton();
@@ -72,9 +75,6 @@
             this.GreenReflectorCheckbox = new System.Windows.Forms.CheckBox();
             this.RedReflectorCheckbox = new System.Windows.Forms.CheckBox();
             this.Image = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.LightHeightTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -104,7 +104,7 @@
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -132,7 +132,7 @@
             this.tableLayoutPanel1.Controls.Add(this.groupBox7, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.91592F));
@@ -155,9 +155,9 @@
             this.groupBox1.Controls.Add(this.ObjectColorRadioButtonConstant);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(2, 50);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(246, 94);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -166,7 +166,7 @@
             // ObjectTextureButton
             // 
             this.ObjectTextureButton.Location = new System.Drawing.Point(170, 43);
-            this.ObjectTextureButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectTextureButton.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectTextureButton.Name = "ObjectTextureButton";
             this.ObjectTextureButton.Size = new System.Drawing.Size(56, 24);
             this.ObjectTextureButton.TabIndex = 5;
@@ -177,7 +177,7 @@
             // ObjectTextureImage
             // 
             this.ObjectTextureImage.Location = new System.Drawing.Point(84, 43);
-            this.ObjectTextureImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectTextureImage.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectTextureImage.Name = "ObjectTextureImage";
             this.ObjectTextureImage.Size = new System.Drawing.Size(75, 49);
             this.ObjectTextureImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -189,7 +189,7 @@
             // 
             this.ObjectColorRadioButtonTexture.AutoSize = true;
             this.ObjectColorRadioButtonTexture.Location = new System.Drawing.Point(7, 47);
-            this.ObjectColorRadioButtonTexture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorRadioButtonTexture.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorRadioButtonTexture.Name = "ObjectColorRadioButtonTexture";
             this.ObjectColorRadioButtonTexture.Size = new System.Drawing.Size(61, 17);
             this.ObjectColorRadioButtonTexture.TabIndex = 3;
@@ -200,7 +200,7 @@
             // ObjectColorButton
             // 
             this.ObjectColorButton.Location = new System.Drawing.Point(170, 13);
-            this.ObjectColorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorButton.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorButton.Name = "ObjectColorButton";
             this.ObjectColorButton.Size = new System.Drawing.Size(56, 24);
             this.ObjectColorButton.TabIndex = 2;
@@ -211,7 +211,7 @@
             // ObjectColorImage
             // 
             this.ObjectColorImage.Location = new System.Drawing.Point(84, 13);
-            this.ObjectColorImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorImage.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorImage.Name = "ObjectColorImage";
             this.ObjectColorImage.Size = new System.Drawing.Size(75, 24);
             this.ObjectColorImage.TabIndex = 1;
@@ -223,7 +223,7 @@
             this.ObjectColorRadioButtonConstant.AutoSize = true;
             this.ObjectColorRadioButtonConstant.Checked = true;
             this.ObjectColorRadioButtonConstant.Location = new System.Drawing.Point(7, 17);
-            this.ObjectColorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorRadioButtonConstant.Name = "ObjectColorRadioButtonConstant";
             this.ObjectColorRadioButtonConstant.Size = new System.Drawing.Size(67, 17);
             this.ObjectColorRadioButtonConstant.TabIndex = 0;
@@ -242,18 +242,48 @@
             this.groupBox2.Controls.Add(this.LightVectorRadioButtonConstant);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(2, 246);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(246, 65);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Light-direction vector";
             // 
+            // LightHeightTextBox
+            // 
+            this.LightHeightTextBox.Location = new System.Drawing.Point(163, 43);
+            this.LightHeightTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.LightHeightTextBox.Name = "LightHeightTextBox";
+            this.LightHeightTextBox.Size = new System.Drawing.Size(76, 20);
+            this.LightHeightTextBox.TabIndex = 9;
+            this.LightHeightTextBox.Text = "100";
+            this.LightHeightTextBox.TextChanged += new System.EventHandler(this.LightHeightTextBox_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(135, 46);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(24, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "H =";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(135, 24);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(24, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "R =";
+            // 
             // LightRadiusTextBox
             // 
             this.LightRadiusTextBox.Location = new System.Drawing.Point(163, 21);
-            this.LightRadiusTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LightRadiusTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.LightRadiusTextBox.Name = "LightRadiusTextBox";
             this.LightRadiusTextBox.Size = new System.Drawing.Size(76, 20);
             this.LightRadiusTextBox.TabIndex = 4;
@@ -264,7 +294,7 @@
             // 
             this.LightVectorRadioButtonRadius.AutoSize = true;
             this.LightVectorRadioButtonRadius.Location = new System.Drawing.Point(4, 39);
-            this.LightVectorRadioButtonRadius.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LightVectorRadioButtonRadius.Margin = new System.Windows.Forms.Padding(2);
             this.LightVectorRadioButtonRadius.Name = "LightVectorRadioButtonRadius";
             this.LightVectorRadioButtonRadius.Size = new System.Drawing.Size(128, 17);
             this.LightVectorRadioButtonRadius.TabIndex = 3;
@@ -277,7 +307,7 @@
             this.LightVectorRadioButtonConstant.AutoSize = true;
             this.LightVectorRadioButtonConstant.Checked = true;
             this.LightVectorRadioButtonConstant.Location = new System.Drawing.Point(4, 17);
-            this.LightVectorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LightVectorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2);
             this.LightVectorRadioButtonConstant.Name = "LightVectorRadioButtonConstant";
             this.LightVectorRadioButtonConstant.Size = new System.Drawing.Size(112, 17);
             this.LightVectorRadioButtonConstant.TabIndex = 2;
@@ -294,9 +324,9 @@
             this.groupBox3.Controls.Add(this.NormalVectorRadioButtonConstant);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(2, 413);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(246, 94);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
@@ -305,7 +335,7 @@
             // NormalMapButton
             // 
             this.NormalMapButton.Location = new System.Drawing.Point(170, 39);
-            this.NormalMapButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NormalMapButton.Margin = new System.Windows.Forms.Padding(2);
             this.NormalMapButton.Name = "NormalMapButton";
             this.NormalMapButton.Size = new System.Drawing.Size(56, 24);
             this.NormalMapButton.TabIndex = 4;
@@ -316,7 +346,7 @@
             // NormalMapImage
             // 
             this.NormalMapImage.Location = new System.Drawing.Point(90, 39);
-            this.NormalMapImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NormalMapImage.Margin = new System.Windows.Forms.Padding(2);
             this.NormalMapImage.Name = "NormalMapImage";
             this.NormalMapImage.Size = new System.Drawing.Size(75, 53);
             this.NormalMapImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -328,7 +358,7 @@
             // 
             this.NormalMapRadioButtonNormalMap.AutoSize = true;
             this.NormalMapRadioButtonNormalMap.Location = new System.Drawing.Point(7, 39);
-            this.NormalMapRadioButtonNormalMap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NormalMapRadioButtonNormalMap.Margin = new System.Windows.Forms.Padding(2);
             this.NormalMapRadioButtonNormalMap.Name = "NormalMapRadioButtonNormalMap";
             this.NormalMapRadioButtonNormalMap.Size = new System.Drawing.Size(81, 17);
             this.NormalMapRadioButtonNormalMap.TabIndex = 2;
@@ -341,7 +371,7 @@
             this.NormalVectorRadioButtonConstant.AutoSize = true;
             this.NormalVectorRadioButtonConstant.Checked = true;
             this.NormalVectorRadioButtonConstant.Location = new System.Drawing.Point(7, 17);
-            this.NormalVectorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NormalVectorRadioButtonConstant.Margin = new System.Windows.Forms.Padding(2);
             this.NormalVectorRadioButtonConstant.Name = "NormalVectorRadioButtonConstant";
             this.NormalVectorRadioButtonConstant.Size = new System.Drawing.Size(112, 17);
             this.NormalVectorRadioButtonConstant.TabIndex = 1;
@@ -358,9 +388,9 @@
             this.groupBox4.Controls.Add(this.DisturbanceRadioButtonNone);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(2, 511);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(246, 99);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
@@ -369,7 +399,7 @@
             // ChangeHeightMapButton
             // 
             this.ChangeHeightMapButton.Location = new System.Drawing.Point(161, 39);
-            this.ChangeHeightMapButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ChangeHeightMapButton.Margin = new System.Windows.Forms.Padding(2);
             this.ChangeHeightMapButton.Name = "ChangeHeightMapButton";
             this.ChangeHeightMapButton.Size = new System.Drawing.Size(56, 24);
             this.ChangeHeightMapButton.TabIndex = 3;
@@ -380,7 +410,7 @@
             // HeightMapImage
             // 
             this.HeightMapImage.Location = new System.Drawing.Point(82, 39);
-            this.HeightMapImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HeightMapImage.Margin = new System.Windows.Forms.Padding(2);
             this.HeightMapImage.Name = "HeightMapImage";
             this.HeightMapImage.Size = new System.Drawing.Size(75, 55);
             this.HeightMapImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -392,7 +422,7 @@
             // 
             this.DisturbanceRadioButtonMap.AutoSize = true;
             this.DisturbanceRadioButtonMap.Location = new System.Drawing.Point(4, 39);
-            this.DisturbanceRadioButtonMap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DisturbanceRadioButtonMap.Margin = new System.Windows.Forms.Padding(2);
             this.DisturbanceRadioButtonMap.Name = "DisturbanceRadioButtonMap";
             this.DisturbanceRadioButtonMap.Size = new System.Drawing.Size(77, 17);
             this.DisturbanceRadioButtonMap.TabIndex = 1;
@@ -405,7 +435,7 @@
             this.DisturbanceRadioButtonNone.AutoSize = true;
             this.DisturbanceRadioButtonNone.Checked = true;
             this.DisturbanceRadioButtonNone.Location = new System.Drawing.Point(4, 17);
-            this.DisturbanceRadioButtonNone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DisturbanceRadioButtonNone.Margin = new System.Windows.Forms.Padding(2);
             this.DisturbanceRadioButtonNone.Name = "DisturbanceRadioButtonNone";
             this.DisturbanceRadioButtonNone.Size = new System.Drawing.Size(96, 17);
             this.DisturbanceRadioButtonNone.TabIndex = 0;
@@ -421,9 +451,9 @@
             this.groupBox5.Controls.Add(this.radioButton1);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(2, 2);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(246, 44);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
@@ -432,7 +462,7 @@
             // LightColorButton
             // 
             this.LightColorButton.Location = new System.Drawing.Point(170, 13);
-            this.LightColorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LightColorButton.Margin = new System.Windows.Forms.Padding(2);
             this.LightColorButton.Name = "LightColorButton";
             this.LightColorButton.Size = new System.Drawing.Size(56, 24);
             this.LightColorButton.TabIndex = 5;
@@ -443,7 +473,7 @@
             // LightColorImage
             // 
             this.LightColorImage.Location = new System.Drawing.Point(84, 13);
-            this.LightColorImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LightColorImage.Margin = new System.Windows.Forms.Padding(2);
             this.LightColorImage.Name = "LightColorImage";
             this.LightColorImage.Size = new System.Drawing.Size(75, 24);
             this.LightColorImage.TabIndex = 4;
@@ -455,7 +485,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(7, 17);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(67, 17);
             this.radioButton1.TabIndex = 3;
@@ -474,9 +504,9 @@
             this.groupBox6.Controls.Add(this.pictureBox3);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(2, 148);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(246, 94);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
@@ -485,7 +515,7 @@
             // ObjectTextureButton2
             // 
             this.ObjectTextureButton2.Location = new System.Drawing.Point(170, 43);
-            this.ObjectTextureButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectTextureButton2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectTextureButton2.Name = "ObjectTextureButton2";
             this.ObjectTextureButton2.Size = new System.Drawing.Size(56, 24);
             this.ObjectTextureButton2.TabIndex = 12;
@@ -496,7 +526,7 @@
             // ObjectTextureImage2
             // 
             this.ObjectTextureImage2.Location = new System.Drawing.Point(84, 43);
-            this.ObjectTextureImage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectTextureImage2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectTextureImage2.Name = "ObjectTextureImage2";
             this.ObjectTextureImage2.Size = new System.Drawing.Size(75, 49);
             this.ObjectTextureImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -508,7 +538,7 @@
             // 
             this.ObjectColorRadioButtonTexture2.AutoSize = true;
             this.ObjectColorRadioButtonTexture2.Location = new System.Drawing.Point(7, 47);
-            this.ObjectColorRadioButtonTexture2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorRadioButtonTexture2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorRadioButtonTexture2.Name = "ObjectColorRadioButtonTexture2";
             this.ObjectColorRadioButtonTexture2.Size = new System.Drawing.Size(61, 17);
             this.ObjectColorRadioButtonTexture2.TabIndex = 10;
@@ -519,7 +549,7 @@
             // ObjectColorButton2
             // 
             this.ObjectColorButton2.Location = new System.Drawing.Point(170, 13);
-            this.ObjectColorButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorButton2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorButton2.Name = "ObjectColorButton2";
             this.ObjectColorButton2.Size = new System.Drawing.Size(56, 24);
             this.ObjectColorButton2.TabIndex = 9;
@@ -530,7 +560,7 @@
             // ObjectColorImage2
             // 
             this.ObjectColorImage2.Location = new System.Drawing.Point(84, 13);
-            this.ObjectColorImage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorImage2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorImage2.Name = "ObjectColorImage2";
             this.ObjectColorImage2.Size = new System.Drawing.Size(75, 24);
             this.ObjectColorImage2.TabIndex = 8;
@@ -542,7 +572,7 @@
             this.ObjectColorRadioButtonConstant2.AutoSize = true;
             this.ObjectColorRadioButtonConstant2.Checked = true;
             this.ObjectColorRadioButtonConstant2.Location = new System.Drawing.Point(7, 17);
-            this.ObjectColorRadioButtonConstant2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ObjectColorRadioButtonConstant2.Margin = new System.Windows.Forms.Padding(2);
             this.ObjectColorRadioButtonConstant2.Name = "ObjectColorRadioButtonConstant2";
             this.ObjectColorRadioButtonConstant2.Size = new System.Drawing.Size(67, 17);
             this.ObjectColorRadioButtonConstant2.TabIndex = 6;
@@ -555,7 +585,7 @@
             // 
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox3.Location = new System.Drawing.Point(2, 15);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(242, 77);
             this.pictureBox3.TabIndex = 7;
@@ -572,9 +602,9 @@
             this.groupBox7.Controls.Add(this.RedReflectorCheckbox);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(2, 315);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox7.Size = new System.Drawing.Size(246, 94);
             this.groupBox7.TabIndex = 6;
             this.groupBox7.TabStop = false;
@@ -583,7 +613,7 @@
             // ReflectorCosinePowerTextBox
             // 
             this.ReflectorCosinePowerTextBox.Location = new System.Drawing.Point(86, 64);
-            this.ReflectorCosinePowerTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ReflectorCosinePowerTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.ReflectorCosinePowerTextBox.Name = "ReflectorCosinePowerTextBox";
             this.ReflectorCosinePowerTextBox.Size = new System.Drawing.Size(76, 20);
             this.ReflectorCosinePowerTextBox.TabIndex = 6;
@@ -593,7 +623,7 @@
             // ReflectorHeightTextBox
             // 
             this.ReflectorHeightTextBox.Location = new System.Drawing.Point(97, 41);
-            this.ReflectorHeightTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ReflectorHeightTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.ReflectorHeightTextBox.Name = "ReflectorHeightTextBox";
             this.ReflectorHeightTextBox.Size = new System.Drawing.Size(76, 20);
             this.ReflectorHeightTextBox.TabIndex = 5;
@@ -624,7 +654,7 @@
             // 
             this.BlueReflectorCheckbox.AutoSize = true;
             this.BlueReflectorCheckbox.Location = new System.Drawing.Point(156, 18);
-            this.BlueReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BlueReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.BlueReflectorCheckbox.Name = "BlueReflectorCheckbox";
             this.BlueReflectorCheckbox.Size = new System.Drawing.Size(47, 17);
             this.BlueReflectorCheckbox.TabIndex = 2;
@@ -636,7 +666,7 @@
             // 
             this.GreenReflectorCheckbox.AutoSize = true;
             this.GreenReflectorCheckbox.Location = new System.Drawing.Point(82, 18);
-            this.GreenReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GreenReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.GreenReflectorCheckbox.Name = "GreenReflectorCheckbox";
             this.GreenReflectorCheckbox.Size = new System.Drawing.Size(55, 17);
             this.GreenReflectorCheckbox.TabIndex = 1;
@@ -648,7 +678,7 @@
             // 
             this.RedReflectorCheckbox.AutoSize = true;
             this.RedReflectorCheckbox.Location = new System.Drawing.Point(8, 18);
-            this.RedReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RedReflectorCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.RedReflectorCheckbox.Name = "RedReflectorCheckbox";
             this.RedReflectorCheckbox.Size = new System.Drawing.Size(46, 17);
             this.RedReflectorCheckbox.TabIndex = 0;
@@ -661,7 +691,7 @@
             this.Image.BackColor = System.Drawing.SystemColors.Control;
             this.Image.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Image.Location = new System.Drawing.Point(0, 0);
-            this.Image.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Image.Margin = new System.Windows.Forms.Padding(2);
             this.Image.Name = "Image";
             this.Image.Size = new System.Drawing.Size(821, 612);
             this.Image.TabIndex = 0;
@@ -670,43 +700,14 @@
             this.Image.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Image_MouseMove);
             this.Image.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Image_MouseUp);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(135, 24);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "R =";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(135, 46);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "H =";
-            // 
-            // LightHeightTextBox
-            // 
-            this.LightHeightTextBox.Location = new System.Drawing.Point(163, 43);
-            this.LightHeightTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.LightHeightTextBox.Name = "LightHeightTextBox";
-            this.LightHeightTextBox.Size = new System.Drawing.Size(76, 20);
-            this.LightHeightTextBox.TabIndex = 9;
-            this.LightHeightTextBox.Text = "100";
-            this.LightHeightTextBox.TextChanged += new System.EventHandler(this.LightHeightTextBox_TextChanged);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1074, 612);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lambertian reflectance model";
