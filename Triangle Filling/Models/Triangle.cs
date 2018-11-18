@@ -42,7 +42,7 @@ namespace Triangle_Filling.Models
             return false;
         }
 
-        float sign(Point p1, Point p2, Point p3)
+        float Sign(Point p1, Point p2, Point p3)
         {
             return (p1.X - p3.X) * (p2.Y - p3.Y) - (p2.X - p3.X) * (p1.Y - p3.Y);
         }
@@ -52,9 +52,9 @@ namespace Triangle_Filling.Models
             float d1, d2, d3;
             bool has_neg, has_pos;
 
-            d1 = sign(P, V1.P, V2.P);
-            d2 = sign(P, V2.P, V3.P);
-            d3 = sign(P, V3.P, V1.P);
+            d1 = Sign(P, V1.P, V2.P);
+            d2 = Sign(P, V2.P, V3.P);
+            d3 = Sign(P, V3.P, V1.P);
 
             has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
             has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);

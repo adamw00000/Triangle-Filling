@@ -97,9 +97,9 @@ namespace Triangle_Filling
             if (cosine < 0)
                 cosine = 0;
 
-            byte R = (byte)(Math.Min((IL.R + ILR.R) * IO.R * cosine / 255d, 255));
-            byte G = (byte)(Math.Min((IL.G + ILG.G) * IO.G * cosine / 255d, 255));
-            byte B = (byte)(Math.Min((IL.B + ILB.B) * IO.B * cosine / 255d, 255));
+            byte R = (byte)(Math.Min(IL.R * IO.R * cosine / 255d + ILR.R * IO.R / 255d, 255));
+            byte G = (byte)(Math.Min(IL.G * IO.G * cosine / 255d + ILG.G * IO.G / 255d, 255));
+            byte B = (byte)(Math.Min(IL.B * IO.B * cosine / 255d + ILB.B * IO.B / 255d, 255));
             return Color.FromArgb(255, R, G, B);
         }
 

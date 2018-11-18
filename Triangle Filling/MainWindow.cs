@@ -358,7 +358,15 @@ namespace Triangle_Filling
         {
             if (double.TryParse((sender as TextBox).Text, out double R) && R > 0)
             {
-                FillConfig.AnimationLightHeight = R;
+                FillConfig.AnimationRadius = R;
+            }
+        }
+
+        private void LightHeightTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse((sender as TextBox).Text, out double H) && H > 0)
+            {
+                FillConfig.AnimationLightHeight = H;
             }
         }
 

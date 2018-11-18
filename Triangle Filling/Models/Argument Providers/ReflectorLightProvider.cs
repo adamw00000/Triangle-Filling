@@ -7,17 +7,27 @@ using System.Threading.Tasks;
 
 namespace Triangle_Filling
 {
-    class ReflectorLightProvider
+    static class ReflectorLightProvider
     {
+        static readonly Color[,] ReflectorTable = new Color[Constants.ImageWidth, Constants.ImageHeight];
 
-        public static Func<int, int, Color> RReflector = (x, y) =>
-            GetReflectorColor(x, y, Color.Red, FillConfig.RReflectorPos);
+        static ReflectorLightProvider()
+        {
+            for (int x = 0; x < Constants.ImageWidth; x++)
+                for (int y = 0; y < Constants.ImageHeight; y++)
+                {
+                    ReflectorTable[x, y] = Color.FromArgb(
+                        GetReflectorColor(x, y, Color.Red, FillConfig.RReflectorPos).R,
+                        GetReflectorColor(x, y, Color.Green, FillConfig.GReflectorPos).G,
+                        GetReflectorColor(x, y, Color.Blue, FillConfig.BReflectorPos).B);
+                }
+        }
 
-        public static Func<int, int, Color> GReflector = (x, y) =>
-            GetReflectorColor(x, y, Color.Green, FillConfig.GReflectorPos);
+        public static Func<int, int, Color> RReflector = (x, y) => Color.FromArgb(ReflectorTable[x, y].R, 0, 0);
 
-        public static Func<int, int, Color> BReflector = (x, y) => 
-            GetReflectorColor(x, y, Color.Blue, FillConfig.BReflectorPos);
+        public static Func<int, int, Color> GReflector = (x, y) => Color.FromArgb(0, ReflectorTable[x, y].G, 0);
+
+        public static Func<int, int, Color> BReflector = (x, y) => Color.FromArgb(0, 0, ReflectorTable[x, y].B);
 
         public static Func<int, int, Color> NoReflector = (x, y) => Color.Black;
 
