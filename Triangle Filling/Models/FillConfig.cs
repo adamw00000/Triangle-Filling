@@ -22,7 +22,7 @@ namespace Triangle_Filling
         public static double ReflectorCosinePower { get; set; } = 100;
 
         public static double AnimationLightHeight { get; set; } = 100;
-        public static double AnimationFrames { get; set; } = 12;
+        public static int AnimationFrames { get; set; } = 48;
         public static double AnimationRadius { get; set; } = 200;
 
         public static Point3D RReflectorPos =>
@@ -33,9 +33,5 @@ namespace Triangle_Filling
             new Point3D(Constants.ImageWidth, Constants.ImageHeight, ReflectorHeight);
         public static Point3D MiddleImagePos =>
             new Point3D(Constants.ImageWidth / 2, Constants.ImageHeight / 2, 0);
-
-
-        //public static double[,] Cosines { get; set; } = new double[800, 600];
-        //public static Color[,] Colors { get; set; } = new Color[800, 600];
     }
 }

@@ -69,7 +69,8 @@ namespace Triangle_Filling
 
         private void DrawAsync()
         {
-            LightVectorProvider.Step++;
+            LightVectorProvider.Step = (LightVectorProvider.Step + 1) % FillConfig.AnimationFrames;
+            FanLightProvider.Step = (FanLightProvider.Step + 1) % FillConfig.AnimationFrames;
 
             if (!worker.IsBusy)
                 worker.RunWorkerAsync();
@@ -419,6 +420,22 @@ namespace Triangle_Filling
             if (double.TryParse((sender as TextBox).Text, out double P) && P > 1)
             {
                 FillConfig.ReflectorCosinePower = P;
+            }
+        }
+
+        private void FanCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (FanCheckbox.Checked)
+            {
+                ScanLineFiller.GetFirstFanColor = FanLightProvider.RedColorAnimation;
+                ScanLineFiller.GetSecondFanColor = FanLightProvider.GreenColorAnimation;
+                ScanLineFiller.GetThirdFanColor = FanLightProvider.BlueColorAnimation;
+            }
+            else
+            {
+                ScanLineFiller.GetFirstFanColor = FanLightProvider.NoColor;
+                ScanLineFiller.GetSecondFanColor = FanLightProvider.NoColor;
+                ScanLineFiller.GetThirdFanColor = FanLightProvider.NoColor;
             }
         }
     }

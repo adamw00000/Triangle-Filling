@@ -26,6 +26,13 @@ namespace Triangle_Filling
         public static Func<int, int, int, Color> GetObjectColor { get; set; } = ObjectColorProvider.ConstantColor;
         public static Func<int, int, int, Color> GetSecondObjectColor { get; set; } = ObjectColorProvider.ConstantColor;
 
+        public static Func<int, int, Color> GetFirstFanColor { get; set; } = FanLightProvider.NoColor;
+        public static Func<int, int, Color> GetSecondFanColor { get; set; } = FanLightProvider.NoColor;
+        public static Func<int, int, Color> GetThirdFanColor { get; set; } = FanLightProvider.NoColor;
+        public static Func<int, int, Vector3D> GetFirstFanVector { get; set; } = FanLightProvider.FirstVector;
+        public static Func<int, int, Vector3D> GetSecondFanVector { get; set; } = FanLightProvider.SecondVector;
+        public static Func<int, int, Vector3D> GetThirdFanVector { get; set; } = FanLightProvider.ThirdVector;
+
         public ScanLineFiller(int id, Triangle triangle)
         {
             this.triangle = triangle;
@@ -81,6 +88,9 @@ namespace Triangle_Filling
             Color ILR = GetRedReflectorColor(x, y);
             Color ILG = GetGreenReflectorColor(x, y);
             Color ILB = GetBlueReflectorColor(x, y);
+            Color IF1 = GetFirstFanColor(x, y);
+            Color IF2 = GetSecondFanColor(x, y);
+            Color IF3 = GetThirdFanColor(x, y);
 
             Color IO;
             if (id % 2 == 0)
@@ -92,14 +102,44 @@ namespace Triangle_Filling
             L.Normalize();
             Vector3D N = GetNormalVector(x, y);
             N.Normalize();
+
             double cosine = Vector3D.DotProduct(N, L);
+
+            Vector3D RedPointVector = FillConfig.RReflectorPos - new Point3D(x, y, 0);
+            Vector3D GreenPointVector = FillConfig.RReflectorPos - new Point3D(x, y, 0);
+            Vector3D BluePointVector = FillConfig.RReflectorPos - new Point3D(x, y, 0);
+            RedPointVector.Normalize();
+            GreenPointVector.Normalize();
+            BluePointVector.Normalize();
+            double redCosine = Math.Max(Vector3D.DotProduct(N, RedPointVector), 0);
+            double greenCosine = Math.Max(Vector3D.DotProduct(N, GreenPointVector), 0);
+            double blueCosine = Math.Max(Vector3D.DotProduct(N, BluePointVector), 0);
+
+            var firstFanVector = GetFirstFanVector(x, y);
+            firstFanVector.Normalize();
+            var secondFanVector = GetSecondFanVector(x, y);
+            secondFanVector.Normalize();
+            var thirdFanVector = GetThirdFanVector(x, y);
+            thirdFanVector.Normalize();
+            double firstFanCosine = Math.Max(Vector3D.DotProduct(N, firstFanVector), 0);
+            double secondFanCosine = Math.Max(Vector3D.DotProduct(N, secondFanVector), 0);
+            double thirdFanCosine = Math.Max(Vector3D.DotProduct(N, thirdFanVector), 0);
 
             if (cosine < 0)
                 cosine = 0;
 
-            byte R = (byte)(Math.Min(IL.R * IO.R * cosine / 255d + ILR.R * IO.R / 255d, 255));
-            byte G = (byte)(Math.Min(IL.G * IO.G * cosine / 255d + ILG.G * IO.G / 255d, 255));
-            byte B = (byte)(Math.Min(IL.B * IO.B * cosine / 255d + ILB.B * IO.B / 255d, 255));
+            byte R = (byte)(Math.Min(IL.R * IO.R * cosine / 255d + ILR.R * IO.R * redCosine / 255d +
+                IF1.R * IO.R * firstFanCosine / 255d +
+                IF2.R * IO.R * secondFanCosine / 255d +
+                IF3.R * IO.R * thirdFanCosine / 255d, 255));
+            byte G = (byte)(Math.Min(IL.G * IO.G * cosine / 255d + ILG.G * IO.G * greenCosine / 255d +
+                IF1.G * IO.G * firstFanCosine / 255d +
+                IF2.G * IO.G * secondFanCosine / 255d +
+                IF3.G * IO.G * thirdFanCosine / 255d, 255));
+            byte B = (byte)(Math.Min(IL.B * IO.B * cosine / 255d + ILB.B * IO.B * blueCosine / 255d +
+                IF1.B * IO.B * firstFanCosine / 255d +
+                IF2.B * IO.B * secondFanCosine / 255d +
+                IF3.B * IO.B * thirdFanCosine / 255d, 255));
             return Color.FromArgb(255, R, G, B);
         }
 
@@ -108,7 +148,7 @@ namespace Triangle_Filling
             Vector3D N = CalculateNormalVector(x, y);
             Vector3D D = CalculateDisturbance(N, x, y);
 
-            N = N + D;
+            N = N + 10*D;
             return N;
         }
     }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Argument Providers\FanLightProvider.cs" />
     <Compile Include="Models\Utility Classes\DirectBitmap.cs" />
     <Compile Include="Models\FillConfig.cs" />
     <Compile Include="Models\Argument Providers\LightColorProvider.cs" />
